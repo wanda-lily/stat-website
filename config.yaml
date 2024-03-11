@@ -1,0 +1,66 @@
+baseURL: https://topelawal.com/
+author: tope lawal
+copyright: Copyright © 2024, tope lawal; all rights reserved.
+paginate: 3
+languageCode: en
+DefaultContentLanguage: en
+enableInlineShortcodes: yes
+ignoreErrors: error-remote-getjson
+ignoreFiles:  ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
+theme: hugo-paper
+title: Tope Lawal
+
+params:
+  avatar: asandatope@gmail.com
+  bio: 
+  color: light
+  github: wanda-lily
+  name: Tope
+  linkedin: tope-remilekun-lawal
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: yes
+menu:
+  main:
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 10
+    - identifier: blogs
+      name: Blogs
+      url: /blog/
+      weight: 10
+    - identifier: projects
+      name: Projects
+      url: /projects/
+      weight: 10
+ 
+      
+taxonomies:
+  category: categories
+  series: series
+  tag: tags
+privacy:
+  instagram:
+    disabled: no
+    simple: yes
+  twitter:
+    disabled: no
+    enableDNT: yes
+    simple: yes
+  vimeo:
+    disabled: no
+    simple: yes
+  youtube:
+    disabled: no
+    privacyEnhanced: yes
+services:
+  instagram:
+    disableInlineCSS: yes
+  twitter:
+    disableInlineCSS: yes
+  linkedin:
+    disableInlineCSS: yes
+

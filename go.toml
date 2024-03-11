@@ -1,0 +1,5 @@
+# Only used for build theme demo site on vercel.com
+[module]
+  [[module.imports]]
+    path = "https://topelawal.com"
+    

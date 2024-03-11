@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+  <section>
+<p>
+  <span style="font-weight: 600; font-size: 30px;  color: #000000">Hello, I'm Tope.</span><br>
+  <span style="font-weight: 400; font-size: 16px;">Welcome to my corner of curiosity—exploring health data science </span>
+</p>
+
+
+    {{ .Content }}
+  </section>
+  <link rel="stylesheet" href="/css/custom.css">
+   
+    <!-- Add your image here -->
+  <img src="/images/welcome.jpg" alt="pastel yellow">
+  
+    <!-- Add your CTA -->
+  <a href="/projects" class="cta-button">Explore Projects</a>
+  
+{{ end }}

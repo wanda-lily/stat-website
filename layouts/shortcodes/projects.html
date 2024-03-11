@@ -1,0 +1,13 @@
+{{ if .IsNamedParams }}
+  {{ with .Get "title" }}
+    <h2>{{ . }}</h2>
+  {{ end }}
+{{ end }}
+
+<ul>
+  {{ range .Site.RegularPages.ByWeight }}
+    {{ if and (in .Params.categories "Projects") (not .Params.hidden) }}
+      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  {{ end }}
+</ul>

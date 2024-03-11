@@ -1,0 +1,284 @@
+---
+title: "Insights from a Colon Cancer Trial"
+description: "Insights from a Clinical Trial: Analysis of Colon Cancer Treatment"
+author: "Tope Lawal"
+date: 2024-01-26 
+categories: ["Projects"]
+tags: ["R Markdown", "plot", "regression"]
+published: true
+---
+<img src="/images/colon.jpg" alt="pastel yellow">
+
+
+This analysis will be based on colon data from the survival package in R, representing valuable insights from an early successful trial of adjuvant chemotherapy for colon cancer. In this study, levamisole, known for its low toxicity, and 5-fluorouracil (5-FU), a moderately toxic chemotherapy agent, were administered.
+
+**Data validation and cleaning**  
+This was the first step because analysis is easier when you understand the data structure and content.
+
+```{r "Data Validation", results=FALSE, warning = FALSE, error = FALSE, message = FALSE, warn.conflicts = FALSE}
+library(survival)
+library(tidyverse)
+#examining data structure
+c_data = colon
+dim(c_data)
+str(c_data)
+head(c_data)
+class(c_data)
+as_tibble(c_data)
+
+#data cleaning
+#check for duplicate rows
+unique(c_data) 
+#remove rows with missing values 
+c_data = na.omit(c_data)
+# check for complete data (no missing values)
+complete.cases(c_data)
+
+#data summary
+summary(c_data)
+summary(c_data$age)
+table(c_data$sex)
+str(c_data)
+c_data$timemn = c_data$time/30
+
+# create new dataframes based on event type
+c_recurrence = subset(c_data, etype == 1)
+c_death = subset(c_data, etype == 2)
+
+```
+
+Seeing is believing, so it pays to plot the data as is. This process helps to pinpoint any potential outliers and provides insights into the fundamental structure of the data. 
+
+```{r "Visulas", echo=FALSE, warning = FALSE, error = FALSE, message = FALSE,  }
+
+library(ggplot2)
+library(tidyverse)
+library(showtext) #non tradition text
+showtext_auto()
+font_add_google("Bebas Neue", ## name of Google font
+                family = "BebasNeue") ## name for your R#
+
+font_add_google("Roboto", ## name of Google font
+                family = "Roboto") ## name for your R
+
+font_add_google("Roboto Condensed",
+                family = "Roboto Condensed")
+
+font_add_google("Roboto",
+                family = "Roboto")
+
+
+a = ggplot(c_death, aes(x = age)) +
+  geom_histogram(binwidth = 5, fill = "#FFE770", colour = "#FDFD96") +
+  geom_vline(xintercept = 60, colour = "#000000", linetype = "dashed") +
+  theme_classic()+
+  labs(title = "Age Distribution", x = "Age", y = "Frequency") +
+  theme(axis.title.x = element_text(vjust = 2, hjust = 0.6, size = 10, family = "Roboto",colour = "#000000"),
+        axis.title.y = element_text(vjust = 2, hjust = 0.5,size = 10, family = "Roboto", colour = "#000000" ),
+        plot.title = element_text(family = "Roboto", colour = "#000000",
+                                  margin = margin(10, 0, 30, 0),
+                                  size = 14,
+                                  vjust = 0.6,  # Vertically centered
+                                  hjust = 0),
+        axis.ticks = element_line(0),
+        axis.line = element_line(linewidth = 0.5, colour = "#C2C2C2"),
+        axis.text = element_text(size = 8, family = "Roboto", colour = "#C2C2C2"),
+        plot.caption = element_text(hjust = 0, family = "Roboto", colour = "#C2C2C2"),  # Horizontally centered
+        panel.background = element_rect(fill = "NA"),
+        plot.background = element_rect(fill = "NA"),
+        plot.margin = margin(t=1, r=1, b= 1, l=1, unit = "cm"))
+
+
+# boxplot for age by treatment
+b = ggplot(c_recurrence, aes(y = timemn)) +
+  geom_boxplot(aes(group = 1), fill = "#FFE770", colour = "#FDFD96") +
+  facet_wrap(rx ~ .)  +
+  labs(title = "Time by Treatment", y= "Time in Months") +
+  theme(axis.title.x = element_text(vjust = 2, hjust = 0.6, size = 10, family = "Roboto",colour = "#000000"),
+        axis.title.y = element_text(vjust = 2, hjust = 0.5,size = 10, family = "Roboto",colour = "#000000" ),
+        plot.title = element_text(family = "Roboto",colour = "#000000",
+                                  margin = margin(10, 0, 30, 0),
+                                  size = 14,
+                                  vjust = 0.5,  # Vertically centered
+                                  hjust = 0),
+        strip.text = element_text(hjust = 0, size = 10, family = "Roboto",colour = "#000000"),
+        strip.background = element_rect(fill  = "#FFE770"),
+        axis.ticks = element_line(0),
+        axis.line = element_line(linewidth = 0.5, colour = "#C2C2C2"),
+        axis.line.y = element_line(),
+        axis.text = element_text(size = 8, family = "Roboto", colour = "#C2C2C2" ),
+        plot.caption = element_text(hjust = 0, family = "Roboto", colour = "#C2C2C2"),  # Horizontally centered
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "NA"),
+        plot.background = element_rect(fill = "NA"),
+        plot.margin = margin(t=1, r=1, b= 1, l=1, unit = "cm"))
+
+library(patchwork)
+a + b
+
+
+```
+
+Data expRobototion lead to hypothesis testing:
+
+Null Hypothesis (Ho) — There is no significant difference in the average (mean) survival times between the treatment groups are the same.
+
+Alternative Hypothesis (Ha)— There is a significant difference in the treatment groups' average (mean) survival times.
+
+```{r results=FALSE, warning = FALSE, error = FALSE, message = FALSE, warn.conflicts = FALSE}
+library(tidyverse)
+library(ggpubr)
+library(DescTools)
+
+
+c_recurrence$rx = as.factor(c_recurrence$rx)
+anova_model = aov(time ~ rx, data = c_recurrence)
+summary(anova_model)
+TukeyHSD (anova_model)
+```
+
+The ANOVA p. value (2.78e-05 ) indicates that the null hypothesis is to be rejected so this means I accept the alternative hypothesis. The Tukey HSD test provides more information with significant differences between ev+5FU-Obs (0.0000554) and Lev+5FU-Lev (0.0009525) and no significant difference between Lev-Obs (0.7826875).
+
+```{r echo=FALSE, warning = FALSE, error = FALSE, message = FALSE,}
+comparisons = list (c("Lev", "Obs"), c("Obs", "Lev+5FU"), c("Lev", "Lev+5FU"))
+
+ggplot(c_data, aes( x = rx, y = timemn, colour = rx))+ #Set up data and axes
+   geom_point(size =2)+                           
+   scale_color_manual(values = c("Obs" = "#C7D3DD", "Lev" = "#FFE770", "Lev+5FU" = "#DE8C3F" )) +
+   stat_compare_means( method = "t.test",comparisons = comparisons,label = "p.signif")+ # Command to show significance category
+  theme_classic()+
+  labs(title = "Treatment Comparison", x = "Treatment", y = "Time (Months)",  colour = "Treatment") +
+    theme(axis.title.x = element_text(vjust = -3, hjust = 0.6, size = 10, family = "Roboto",colour = "#000000"),
+        axis.title.y = element_text(vjust = 2, hjust = 0.5,size = 10, family = "Roboto",colour = "#000000" ),
+        plot.title = element_text(family = "Roboto",colour = "#000000",
+                                  margin = margin(10, 0, 30, 0),
+                                  size = 14,
+                                  vjust = 0.5,  # Vertically centered
+                                  hjust = 0),
+        axis.ticks = element_line(0),
+        axis.line = element_line(linewidth = 0.5, colour = "#C2C2C2"),
+        legend.title = element_text(family = "Roboto", colour = "#000000", size = 10),
+        legend.position = "right",
+        legend.key = element_blank(),
+        legend.background =element_blank(),
+        legend.text = element_text(size = 10, family = "Roboto", colour = "#000000"),
+        plot.caption = element_text(hjust = 0, family = "Roboto", colour = "#C2C2C2"),  # Horizontally centered
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = NA),
+        plot.background = element_rect(fill = "#Ffffff"),
+        plot.margin = margin(t=1, r=1, b= 1, l=1, unit = "cm"))
+
+
+```
+This answers the question “What treatment is more effective?” you would be justified to stop here but curiosity killed the cat.
+After the ANOVA, additional tests satisfy curiosity….
+
+Q: Is there a significant difference in the average (mean) survival times between male and female patients?
+
+```{r results=FALSE, warning = FALSE, error = FALSE, message = FALSE, warn.conflicts = FALSE}
+# Subset the dataset into male and female groups
+male_group <- subset(c_death, sex == 1)
+female_group <- subset(c_death, sex == 0)
+
+# Perform an independent two-sample t-test
+t_test_result <- t.test(male_group$time, female_group$time, paired = FALSE)
+
+# Print the results
+print(t_test_result)
+```
+
+Based on the provided results, there is no significant evidence to conclude that there is a difference in the average survival times between male and female patients.
+
+Q: Is there a significant correlation between the number of nodes and time to recurrence?
+
+```{r results=FALSE, warning = FALSE, error = FALSE, message = FALSE, warn.conflicts = FALSE}
+#Calculate the correlation between "nodes" and "timemn"
+cor.test(c_data$nodes, c_data$timemn)
+```
+
+Based on the results, there is a weak negative correlation between the number of nodes and time. As the number of nodes increases, the time in years tends to decrease. The p-value (< 2.2e-16) is almost zero, which suggests a strong level of confidence.
+
+Linear regression could help you better understand the relationship of nodes and time to recurrence.
+
+```{r results=FALSE, warning = FALSE, error = FALSE, message = FALSE, warn.conflicts = FALSE}
+library(stats)
+model <- lm(timemn ~ nodes, data = c_data)
+summary(model)
+```
+
+Just to see how other models fit
+
+```{r results=FALSE, warning = FALSE, error = FALSE, message = FALSE, warn.conflicts = FALSE}
+#finding the best model
+library(AICcmodavg)
+
+#fit candidate models
+model1 <- lm(timemn ~ age, data = c_data)
+model2 <- lm(timemn ~ nodes, data = c_data)
+model3 <- lm(timemn ~ age + nodes, data = c_data)
+model4 <- lm(timemn ~ age * nodes, data = c_data)
+
+models = list(model1, model2,model3, model4)
+model_names = c("model1", "model2", "model3", "model4")
+aictab(cand.set = models, modnames = model_names)
+```
+
+model 2 stands out as the best model with the lowest AICc value, the highest AICc weight, and the smallest Delta_AICc compared to the other models.
+
+Survival Analysis
+
+```{r results=FALSE, warning = FALSE, error = FALSE, message = FALSE, warn.conflicts = FALSE}
+library(survival)
+library(survminer)
+library(ggthemes)
+
+survival_object <- Surv(time = c_data$timemn, event = c_data$etype==2)
+
+#Kaplan-Meier Survival Curve
+km_fit <- survfit(survival_object ~ c_data$rx)
+summary(km_fit)
+```
+
+```{r echo=FALSE, warning = FALSE, error = FALSE, message = FALSE,}
+
+ ggsurvplot(km_fit, data = c_data,
+                    conf.int = TRUE, 
+                    pval = FALSE,
+                    risk.table = FALSE, 
+                    surv.median.line = "hv",
+                    palette = c( "#FFE770", "#DE8C3F", "#C7D3DD"),
+            ggtheme = theme(axis.title.x = element_text(vjust = -2, hjust = 0.5, size = 10, family = "Roboto",
+                                                        colour = "#000000"),
+        axis.title.y = element_text(vjust = 2, hjust = 0.5,size = 10, family = "Roboto", colour = "#000000" ),
+        plot.title = element_text(family = "Roboto",colour = "#000000",
+                                  margin = margin(10, 0, 20, 0),
+                                  size = 18,
+                                  vjust = 0.5,  # Vertically centered
+                                  hjust = 0),
+        axis.line = element_line(linewidth = 0.5, colour = "#C2C2C2"),
+        axis.ticks = element_line(linewidth = 0.5, colour = "#C2C2C2"),
+        axis.text = element_text(size = 8, family = "Roboto", colour = "#C2C2C2"),
+        plot.caption = element_text(hjust = 0, family = "Roboto", colour = "#000000"),  # Horizontally centered
+        panel.background = element_rect(fill = NA),
+        plot.background = element_rect(fill = "#ffffff"),
+        plot.margin = margin(t=1, r=1, b= 1, l=1, unit = "cm"),
+        legend.background = element_rect(fill = "#ffffff"),
+        legend.key = element_rect(fill = "#ffffff"),
+        legend.text = element_text(family = "Roboto",colour = "#000000"),
+        legend.title = element_blank(),
+        legend.position = "left",
+        panel.grid = element_line(colour = "#ffffff")
+        ))+
+          labs(title = "Kaplan-Meier Survival Curve", x = "Time (Months)", y = "Probability", caption = "p = 0.0014")
+
+
+ 
+p_lab = "p = 0.0014"
+
+```
+
+
+
+The curves for the three options are similar but Lev + 5FU has the highest median time of survival of 83.5 months.
+
+In conclusion, this analysis has not only answered the fundamental question of treatment effectiveness but also satisfies curiosity, providing a comprehensive understanding of various factors influencing survival times in colon cancer patients.
