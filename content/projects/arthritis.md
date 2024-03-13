@@ -123,7 +123,7 @@ ncol=2
 <img src="/projects/arthritis_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 These new clusters have left behind patient variation and hence the clusters are better representative of the b-cell population.
-*N.B: Always remember to save, it saves time and in case of any disruption you can easily pick up and not have to run stuff from scratch which prevents "premium tears".*
+
 
 
 ```r
@@ -358,13 +358,7 @@ ggline <- geom_line(data=line.data.sub, mapping=aes(x=UMAP_1, y=UMAP_2, group=ed
 gridExtra::grid.arrange(
     plotUMAP(sub.nest, colour_by="TSCAN.first") + ggline,
     plotUMAP(sub.nest, colour_by="TSCAN.second") + ggline,
-    plotUMAP(sub.nest, colour_by="TSCAN.third") + ggline,
-    plotUMAP(sub.nest, colour_by="TSCAN.fourth") + ggline,
-    plotUMAP(sub.nest, colour_by="TSCAN.fifth") + ggline,
-    plotUMAP(sub.nest, colour_by="TSCAN.sixth") + ggline,
-    plotUMAP(sub.nest, colour_by="TSCAN.seventh") + ggline,
-    plotUMAP(sub.nest, colour_by="TSCAN.eighth") + ggline,
-    ncol=4
+    ncol=2
 )
 ```
 
