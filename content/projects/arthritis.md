@@ -125,7 +125,6 @@ ncol=2
 These new clusters have left behind patient variation and hence the clusters are better representative of the b-cell population.
 
 
-
 ```r
 # find markers for every cluster compared to all remaining cells, report only the positive ones
 
