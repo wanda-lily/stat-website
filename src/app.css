@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@import "basecoat-css/maia";
+
+/* Manual dark mode: toggled via a `.dark` class on <html>, controlled in script.js */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-paper: var(--background);
+  --color-ink: var(--foreground);
+  --color-panel: var(--panel);
+  --color-panelText: var(--panelText);
+  --color-signal: var(--signal);
+  --color-signalSoft: var(--signalSoft);
+  --color-line: var(--line);
+  --color-lineDark: var(--lineDark);
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-sans: var(--font-body);
+}
+
+:root {
+  --background: #faf8f4;
+  --foreground: #400d1b;
+  --panel: #ffffff;
+  --panelText: #1b1e20;
+  --signal: var(--color-blue-400);
+  --signalSoft: #dce8e6;
+  --line: #dbd4d1;
+  --lineDark: #2a2d30;
+}
+
+.dark {
+  --background: #15171a;
+  --foreground: #edeae4;
+  --panel: #15171a;
+  --panelText: #edeae4;
+  --signal: var(--color-blue-400);
+  --signalSoft: #dce8e6;
+  --line: #2a2d30;
+  --lineDark: #1c1e21;
+}
+
+@layer components {
+  #main {
+    position: relative;
+  }
+  .panel {
+    display: none;
+  }
+  .panel.active {
+    display: block;
+    animation: fadeIn 0.25s ease;
+  }
+  /* Panels */
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  #nav a.active .nav-dot {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .nav-item {
+    @apply border-r border-line flex-1 h-full flex items-center justify-center last:border-r-0 text-foreground/70;
+  }
+  .nav-dot {
+    @apply w-2.5 h-2.5 rounded-full bg-signal opacity-0 scale-50 transition-all;
+  }
+}

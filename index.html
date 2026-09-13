@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      ;(() => {
+        try {
+          const stored = localStorage.getItem("themeMode")
+          if (
+            stored
+              ? stored === "dark"
+              : matchMedia("(prefers-color-scheme: dark)").matches
+          ) {
+            document.documentElement.classList.add("dark")
+          }
+        } catch (_) {}
+      })()
+    </script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Tope</title>
+  </head>
+  <body>
+    <div
+      id="wrapper"
+      class="mx-auto my-4 min-h-screen max-w-6xl border border-line flex flex-col"
+    >
+      <!-- Nav -->
+
+      <nav
+        id="nav"
+        class="mx-auto w-full flex justify-between h-18 items-center px-8 text-sm border-b"
+      >
+        <div id="home-link" class="nav-item">
+          <a href="#home" class="icon solid flex items-center gap-2">
+            <span class="nav-dot"></span>
+            <span>Home</span>
+          </a>
+        </div>
+        <div id="work-link" class="nav-item">
+          <a href="#work" class="icon solid flex items-center gap-2">
+            <span class="nav-dot"></span>
+            <span>Work</span>
+          </a>
+        </div>
+        <div id="contact-link" class="nav-item">
+          <a href="#contact" class="icon solid flex items-center gap-2">
+            <span class="nav-dot"></span>
+            <span>Contact</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Main -->
+      <div id="main" class="flex-1 flex px-16 py-8">
+        <!-- Me -->
+        <article id="home" class="panel intro flex-col flex-1 w-full">
+          <header class="w-full">
+            <h1
+              class="font-display font-bold text-6xl sm:text-8xl tracking-tight pb-4"
+            >
+              Tope Lawal
+            </h1>
+          </header>
+
+          <div id="about-popover" class="popover w-full">
+            <button
+              id="about-popover-trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="about-popover-popover"
+              class="btn w-full rounded-none justify-start"
+              data-variant="outline"
+            >
+              About
+            </button>
+            <div
+              id="about-popover-popover"
+              data-popover
+              aria-hidden="true"
+              class="w-72 rounded-none shadow-none mt-4 bg-transparent!"
+            >
+              <div class="flex flex-col gap-2 text-md">
+                <p>
+                  I love a good story. <br />
+
+                  The kind where you start somewhere, follow a few threads, take
+                  a wrong turn or two, and eventually end up somewhere you
+                  couldn't quite have predicted at the beginning. I suppose
+                  that's how I've ended up here too.
+                </p>
+                <p>
+                  I've studied human anatomy, spent time buried in diagnostics
+                  and precision medicine, taught myself R to work with
+                  bioinformatics data, and now build apps and automations for a
+                  living. Somewhere along the way, I also decided to learn how
+                  to build for the web.
+                </p>
+                <p>
+                  The common thread is probably that I like figuring things out.
+                  Give me a question, a problem, or something I don't quite
+                  understand yet, and I'm usually happy to follow it until
+                  things start making sense.
+                </p>
+                <p>
+                  Outside of work, you'll probably find me reading, planning a
+                  trip I may or may not take anytime soon, watching something
+                  for far too long, or falling down another rabbit hole because
+                  I wanted to understand one small thing. This is my little
+                  corner of the internet for some of those things.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Work -->
+        <article id="work" class="panel">
+          <header>
+            <h2
+              class="font-display font-bold text-6xl sm:text-6xl tracking-tight pb-4"
+            >
+              Work
+            </h2>
+          </header>
+          <div id="work-table" class="table-container">
+            <table class="table table-fixed w-full" id="project-list">
+              <thead>
+                <tr>
+                  <th class="w-56">Project Name</th>
+                  <th class="w-80">Description</th>
+                  <th>Employer</th>
+                  <th>Status</th>
+                  <th>Year</th>
+                  <th class="text-end">Link</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Contact -->
+        <article id="contact" class="panel">
+          <header>
+            <h2
+              class="font-display font-bold text-6xl sm:text-6xl tracking-tight pb-4"
+            >
+              Contact
+            </h2>
+          </header>
+          <div id="contact-table" class="table-container">
+            <table class="table" id="project-list">
+              <tbody>
+                <tr>
+                  <td class="font-medium">LinkedIn</td>
+                  <td>
+                    <a
+                      href="${escapeHtml(p.link)}"
+                      class="btn rounded-none"
+                      data-variant="outline"
+                      data-size="sm"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <svg
+                        class="w-3.5 h-3.5 shrink-0 ml-1"
+                        fill="none"
+                        stroke="#666666"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M7 17L17 7M7 7h10v10"
+                        ></path>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Email</td>
+                  <td>
+                    <a
+                      href="${escapeHtml(p.link)}"
+                      class="btn rounded-none"
+                      data-variant="outline"
+                      data-size="sm"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <svg
+                        class="w-3.5 h-3.5 shrink-0 ml-1"
+                        fill="none"
+                        stroke="#666666"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M7 17L17 7M7 7h10v10"
+                        ></path>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Github</td>
+                  <td>
+                    <a
+                      href="${escapeHtml(p.link)}"
+                      class="btn rounded-none"
+                      data-variant="outline"
+                      data-size="sm"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <svg
+                        class="w-3.5 h-3.5 shrink-0 ml-1"
+                        fill="none"
+                        stroke="#666666"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M7 17L17 7M7 7h10v10"
+                        ></path>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="mx-auto flex h-[4.5rem] w-full items-center justify-between px-8 text-xs opacity-60 border-t border-line"
+      >
+        <p>Copyright © <span id="year"></span> Tope Lawal</p>
+
+        <button
+          type="button"
+          aria-label="Toggle dark mode"
+          data-tooltip="Toggle dark mode"
+          data-side="bottom"
+          onclick="window.basecoat.theme.toggle()"
+          class="btn size-8"
+          data-variant="outline"
+          data-size="icon"
+        >
+          <span class="hidden dark:block"
+            ><svg
+              class="lucide lucide-sun"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </span>
+          <span class="block dark:hidden">
+            <svg
+              class="lucide lucide-moon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+              />
+            </svg>
+          </span>
+        </button>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/basecoat-css/dist/js/basecoat.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/basecoat-css/dist/js/popover.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
