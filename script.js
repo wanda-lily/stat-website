@@ -30,6 +30,18 @@ function initFromHash() {
 window.addEventListener("popstate", initFromHash)
 initFromHash()
 
+//----- contact copy email------
+
+async function copyEmail() {
+  const email = "asandatope@gmail.com"
+  try {
+    await navigator.clipboard.writeText(email)
+    return "Email copied to clipboard"
+  } catch (error) {
+    console.log("ERR", error)
+    return "Couldn't copy email address"
+  }
+}
 // ---- Footer year ----
 document.getElementById("year").textContent = new Date().getFullYear()
 
@@ -72,7 +84,7 @@ function renderProjectRow(p) {
                           d="M7 17L17 7M7 7h10v10"
                         ></path>
                       </svg></a>`
-    : `<span class="text-xs text-ink/40 dark:text-panelText/40">—</span>`
+    : `<span class="text-xs  text-ink/40 dark:text-panelText/40">—</span>`
 
   const techHtml = p.tech?.length
     ? `<div class="text-xs text-ink/50 dark:text-panelText/50 mt-1">${escapeHtml(p.tech.join(", "))}</div>`

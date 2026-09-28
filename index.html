@@ -20,16 +20,16 @@
     <link rel="stylesheet" href="style.css" />
     <title>Tope</title>
   </head>
-  <body>
+  <body class="">
     <div
       id="wrapper"
-      class="mx-auto my-4 min-h-screen max-w-6xl border border-line flex flex-col"
+      class="mx-auto my-4 w-[calc(100%-2rem)] max-w-6xl min-h-[calc(100dvh-2rem)] border border-line flex flex-col"
     >
       <!-- Nav -->
 
       <nav
         id="nav"
-        class="mx-auto w-full flex justify-between h-18 items-center px-8 text-sm border-b"
+        class="sticky top-4 z-100 bg-background before:absolute before:-inset-x-px before:-top-[17px] before:h-[17px] before:bg-background before:border-b before:border-line shrink-0 w-full flex justify-between h-18 items-center px-4 sm:px-8 text-sm border-b"
       >
         <div id="home-link" class="nav-item">
           <a href="#home" class="icon solid flex items-center gap-2">
@@ -52,79 +52,84 @@
       </nav>
 
       <!-- Main -->
-      <div id="main" class="flex-1 flex px-16 py-8">
+      <div id="main" class="flex-1 flex px-4 sm:px-8 md:px-16 py-8">
         <!-- Me -->
-        <article id="home" class="panel intro flex-col flex-1 w-full">
+        <article id="home" class="panel intro flex-col flex-1">
           <header class="w-full">
-            <h1
-              class="font-display font-bold text-6xl sm:text-8xl tracking-tight pb-4"
+            <h2
+              class="font-display font-bold text-4xl sm:text-6xl tracking-tight pb-4"
             >
               Tope Lawal
-            </h1>
+            </h2>
           </header>
-
-          <div id="about-popover" class="popover w-full">
-            <button
-              id="about-popover-trigger"
-              type="button"
-              aria-expanded="false"
-              aria-controls="about-popover-popover"
-              class="btn w-full rounded-none justify-start"
+          <details id="about" class="w-full group">
+            <summary
+              class="btn w-full rounded-none justify-between cursor-pointer list-none"
               data-variant="outline"
             >
-              About
-            </button>
-            <div
-              id="about-popover-popover"
-              data-popover
-              aria-hidden="true"
-              class="w-72 rounded-none shadow-none mt-4 bg-transparent!"
-            >
-              <div class="flex flex-col gap-2 text-md">
-                <p>
-                  I love a good story. <br />
+              <span>About</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevrons-up-down preview-icon"
+              >
+                <path d="m7 15 5 5 5-5" />
+                <path d="m7 9 5-5 5 5" />
+              </svg>
+            </summary>
+            <div class="flex flex-col gap-2">
+              <p>
+                I've always been drawn to the question behind the work: what are
+                we actually trying to do here, and how do we get there?
+              </p>
 
-                  The kind where you start somewhere, follow a few threads, take
-                  a wrong turn or two, and eventually end up somewhere you
-                  couldn't quite have predicted at the beginning. I suppose
-                  that's how I've ended up here too.
-                </p>
-                <p>
-                  I've studied human anatomy, spent time buried in diagnostics
-                  and precision medicine, taught myself R to work with
-                  bioinformatics data, and now build apps and automations for a
-                  living. Somewhere along the way, I also decided to learn how
-                  to build for the web.
-                </p>
-                <p>
-                  The common thread is probably that I like figuring things out.
-                  Give me a question, a problem, or something I don't quite
-                  understand yet, and I'm usually happy to follow it until
-                  things start making sense.
-                </p>
-                <p>
-                  Outside of work, you'll probably find me reading, planning a
-                  trip I may or may not take anytime soon, watching something
-                  for far too long, or falling down another rabbit hole because
-                  I wanted to understand one small thing. This is my little
-                  corner of the internet for some of those things.
-                </p>
-              </div>
+              <p>That question has taken me in a few different directions.</p>
+              <p>
+                I started out in the life sciences, where I became interested in
+                the stories hidden inside data. During my master's research at
+                DCU, I taught myself R to work with bioinformatics data because
+                I needed a way to answer the questions I was interested in. That
+                experience stuck with me, and often, I find the most interesting
+                part of a problem is figuring out what you need to learn to
+                solve it.
+              </p>
+              <p>
+                These days, I build applications and automations at Fingal
+                County Council, working across Power Apps, Power Automate,
+                Dataverse and other parts of the Microsoft ecosystem. I like
+                taking something that starts as a messy process, an idea or a
+                problem and working backwards until there's something useful at
+                the other end.
+              </p>
+
+              <p>
+                I'm still figuring out exactly where that curiosity will take
+                me, but the pattern has stayed pretty consistent: give me a
+                problem worth understanding, and I'm happy to figure out the
+                rest.
+              </p>
             </div>
-          </div>
+          </details>
         </article>
 
         <!-- Work -->
         <article id="work" class="panel">
           <header>
             <h2
-              class="font-display font-bold text-6xl sm:text-6xl tracking-tight pb-4"
+              class="font-display font-bold text-4xl sm:text-6xl tracking-tight pb-4"
             >
               Work
             </h2>
           </header>
           <div id="work-table" class="table-container">
-            <table class="table table-fixed w-full" id="project-list">
+            <table class="table min-w-[700px] w-full" id="project-list">
               <thead>
                 <tr>
                   <th class="w-56">Project Name</th>
@@ -144,13 +149,13 @@
         <article id="contact" class="panel">
           <header>
             <h2
-              class="font-display font-bold text-6xl sm:text-6xl tracking-tight pb-4"
+              class="font-display font-bold text-4xl sm:text-6xl tracking-tight pb-4"
             >
               Contact
             </h2>
           </header>
           <div id="contact-table" class="table-container">
-            <table class="table" id="project-list">
+            <table class="table" id="contact-list">
               <tbody>
                 <tr>
                   <td class="font-medium">LinkedIn</td>
@@ -241,7 +246,7 @@
 
       <!-- Footer -->
       <footer
-        class="mx-auto flex h-[4.5rem] w-full items-center justify-between px-8 text-xs opacity-60 border-t border-line"
+        class="mx-auto bg-background flex h-[4.5rem] w-full items-center justify-between px-8 text-xs opacity-60 border-t border-line"
       >
         <p>Copyright © <span id="year"></span> Tope Lawal</p>
 
@@ -251,8 +256,8 @@
           data-tooltip="Toggle dark mode"
           data-side="bottom"
           onclick="window.basecoat.theme.toggle()"
-          class="btn size-8"
-          data-variant="outline"
+          class="btn bg-transparent! size-8"
+          data-variant=""
           data-size="icon"
         >
           <span class="hidden dark:block"

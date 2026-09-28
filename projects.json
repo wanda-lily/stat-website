@@ -1,56 +1,74 @@
 [
   {
-    "title": "Personal stats site (R / Hugo / blogdown)",
+    "title": "County Art Collection App",
+    "year": 2025,
+    "description": "An internal application for tracking the council's art collection, including artwork locations, associated artists and lending arrangements.",
+    "tech": ["dataverse", "model-driven", "canvas page"],
+    "link": "",
+    "employer": "Fingal County Council",
+    "status": "Live"
+  },
+  {
+    "title": "Copilot Customer Care Agent",
+    "year": 2025,
+    "description": "A Copilot agent designed to help the Customer Care team retrieve information and speed up responses to queries.",
+    "tech": ["copilot studio", "power automate"],
+    "link": "",
+    "employer": "Fingal County Council",
+    "status": "Archived"
+  },
+  {
+    "title": "Procurement",
+    "year": 2025,
+    "description": "A central application for the Procurement team to manage records, stages, documents and associated processes.",
+    "tech": ["dataverse", "power automate", "power platform", "power bi"],
+    "link": "",
+    "employer": "Fingal County Council",
+    "status": "Live"
+  },
+  {
+    "title": "Personal Stats Site",
     "year": 2024,
-    "description": "My first personal site, built with R via blogdown on top of Hugo. Since rebuilt as a plain HTML/CSS/JS site.",
-    "tech": ["R", "Hugo", "blogdown"],
+    "description": "My first personal website, built with R and blogdown on top of Hugo. It was later rebuilt as a plain HTML, CSS and JavaScript site.",
+    "tech": ["r", "hugo", "blogdown"],
     "link": "",
     "employer": "Personal",
     "status": "Archived"
   },
   {
-    "title": "Personal stats site (R / Hugo / blogdown)",
-    "year": 2024,
-    "description": "My first personal site, bus a plain HTML/CSS/JS site.",
-    "tech": ["R", "Hugo", "blogdown"],
-    "link": "https://www.w3.org/TR/SVG/",
-    "employer": "Personal",
-    "status": "Archived"
+    "title": "Applications Catalogue",
+    "year": 2026,
+    "description": "An application catalogue for tracking business applications, their ownership, status and related information.",
+    "tech": ["react", "dataverse", "power automate", "code app"],
+    "link": "",
+    "employer": "Fingal County Council",
+    "status": "Development"
   },
   {
-    "title": "Personal stats site (R / Hugo / blogdown)",
-    "year": 2024,
-    "description": "My first personal site, built with R via blogdown on top of Hugo. Since rebuilt as a plain HTML/CSS/JS site.",
-    "tech": ["R", "Hugo", "blogdown"],
+    "title": "Approval Interface",
+    "year": 2026,
+    "description": "A streamlined interface for senior stakeholders to review and process approval requests.",
+    "tech": ["react", "code app", "power automate"],
+    "link": "",
+    "employer": "Fingal County Council",
+    "status": "Test"
+  },
+  {
+    "title": "RAG Document Retrieval",
+    "year": 2026,
+    "description": "A personal experiment exploring retrieval-augmented generation for searching and retrieving information from documents.",
+    "tech": ["python"],
     "link": "",
     "employer": "Personal",
     "status": "Archived"
   },
   {
-    "title": "Personal stats site (R / Hugo / blogdown)",
-    "year": 2024,
-    "description": "My first personal site, built with R via blogdown on top of Hugo. Since rebuilt as a plain HTML/CSS/JS site.",
-    "tech": ["R", "Hugo", "blogdown"],
-    "link": "",
+    "title": "Joanna Animasaun",
+    "year": 2026,
+    "description": "A personal website built with Next.js.",
+    "tech": ["next.js"],
+    "link": "https://joannaanimasaun.com/",
     "employer": "Personal",
-    "status": "Archived"
-  },
-  {
-    "title": "Personal stats site (R / Hugo / blogdown)",
-    "year": 2024,
-    "description": "My first personal site, built with R via blogdown on top of Hugo. Since rebuilt as a plain HTML/CSS/JS site.",
-    "tech": ["R", "Hugo", "blogdown"],
-    "link": "",
-    "employer": "Personal",
-    "status": "Archived"
-  },
-  {
-    "title": "Personal stats site (R / Hugo / blogdown)",
-    "year": 2024,
-    "description": "My first personal site, built with R via blogdown on top of Hugo. Since rebuilt as a plain HTML/CSS/JS site.",
-    "tech": ["R", "Hugo", "blogdown"],
-    "link": "",
-    "employer": "Personal",
-    "status": "Archived"
+    "status": "Live"
   }
 ]

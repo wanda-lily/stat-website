@@ -24,7 +24,7 @@
   --foreground: #400d1b;
   --panel: #ffffff;
   --panelText: #1b1e20;
-  --signal: var(--color-blue-400);
+  --signal: #4a87ff;
   --signalSoft: #dce8e6;
   --line: #dbd4d1;
   --lineDark: #2a2d30;
@@ -35,7 +35,7 @@
   --foreground: #edeae4;
   --panel: #15171a;
   --panelText: #edeae4;
-  --signal: var(--color-blue-400);
+  --signal: #4a87ff;
   --signalSoft: #dce8e6;
   --line: #2a2d30;
   --lineDark: #1c1e21;
@@ -45,11 +45,15 @@
   #main {
     position: relative;
   }
+
   .panel {
     display: none;
+    flex: 1;
+    min-width: 0;
   }
   .panel.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
     animation: fadeIn 0.25s ease;
   }
   /* Panels */
