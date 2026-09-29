@@ -3,20 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      ;(() => {
-        try {
-          const stored = localStorage.getItem("themeMode")
-          if (
-            stored
-              ? stored === "dark"
-              : matchMedia("(prefers-color-scheme: dark)").matches
-          ) {
-            document.documentElement.classList.add("dark")
-          }
-        } catch (_) {}
-      })()
-    </script>
+    <link rel="icon" type="image/png" href="./favicon.png?v=2" />
     <link rel="stylesheet" href="style.css" />
     <title>Tope</title>
   </head>
@@ -84,21 +71,25 @@
                 <path d="m7 9 5-5 5 5" />
               </svg>
             </summary>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 text-sm p-4 text-pretty">
               <p>
-                I've always been drawn to the question behind the work: what are
-                we actually trying to do here, and how do we get there?
+                I am drawn to the questions behind the work. What are we trying
+                to do here, and how do we get there?
               </p>
 
-              <p>That question has taken me in a few different directions.</p>
+              <p>
+                These questions have taken me in a few different directions.
+              </p>
               <p>
                 I started out in the life sciences, where I became interested in
-                the stories hidden inside data. During my master's research at
-                DCU, I taught myself R to work with bioinformatics data because
-                I needed a way to answer the questions I was interested in. That
-                experience stuck with me, and often, I find the most interesting
-                part of a problem is figuring out what you need to learn to
-                solve it.
+                the stories hidden in data. This led me to learn R and other
+                technologies for bioinformatics to be able to answer the
+                questions I was interested in.
+              </p>
+              <p>
+                That experience stuck with me, and often, I find the most
+                interesting part of a problem is figuring out what you need to
+                learn to solve it.
               </p>
               <p>
                 These days, I build applications and automations at Fingal
@@ -157,11 +148,11 @@
           <div id="contact-table" class="table-container">
             <table class="table" id="contact-list">
               <tbody>
-                <tr>
-                  <td class="font-medium">LinkedIn</td>
+                <tr class="flex justify-start">
+                  <td class="font-medium w-24">LinkedIn</td>
                   <td>
                     <a
-                      href="${escapeHtml(p.link)}"
+                      href="https://www.linkedin.com/in/tope-remilekun-lawal/"
                       class="btn rounded-none"
                       data-variant="outline"
                       data-size="sm"
@@ -169,53 +160,65 @@
                       rel="noopener"
                     >
                       <svg
-                        class="w-3.5 h-3.5 shrink-0 ml-1"
-                        fill="none"
-                        stroke="#666666"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
                         viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
                         stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-arrow-up-right preview-icon"
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M7 17L17 7M7 7h10v10"
-                        ></path>
+                        <path d="M7 7h10v10" />
+                        <path d="M7 17 17 7" />
                       </svg>
                     </a>
                   </td>
                 </tr>
-                <tr>
-                  <td class="font-medium">Email</td>
+                <tr class="flex justify-start">
+                  <td class="font-medium w-24">Email</td>
                   <td>
-                    <a
-                      href="${escapeHtml(p.link)}"
+                    <button
                       class="btn rounded-none"
                       data-variant="outline"
                       data-size="sm"
-                      target="_blank"
-                      rel="noopener"
+                      id="email-button"
                     >
                       <svg
-                        class="w-3.5 h-3.5 shrink-0 ml-1"
-                        fill="none"
-                        stroke="#666666"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
                         viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
                         stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-copy preview-icon"
                       >
+                        <rect
+                          width="14"
+                          height="14"
+                          x="8"
+                          y="8"
+                          rx="2"
+                          ry="2"
+                        />
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M7 17L17 7M7 7h10v10"
-                        ></path>
+                          d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                        />
                       </svg>
-                    </a>
+                    </button>
+                    <span id="copy-message" class="text-xs opacity-60"></span>
                   </td>
                 </tr>
-                <tr>
-                  <td class="font-medium">Github</td>
+                <tr class="flex justify-start">
+                  <td class="font-medium w-24">Github</td>
                   <td>
                     <a
-                      href="${escapeHtml(p.link)}"
+                      href="https://github.com/wanda-lily"
                       class="btn rounded-none"
                       data-variant="outline"
                       data-size="sm"
@@ -223,17 +226,19 @@
                       rel="noopener"
                     >
                       <svg
-                        class="w-3.5 h-3.5 shrink-0 ml-1"
-                        fill="none"
-                        stroke="#666666"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
                         viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
                         stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-arrow-up-right preview-icon"
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M7 17L17 7M7 7h10v10"
-                        ></path>
+                        <path d="M7 7h10v10" />
+                        <path d="M7 17 17 7" />
                       </svg>
                     </a>
                   </td>

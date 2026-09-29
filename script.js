@@ -34,14 +34,28 @@ initFromHash()
 
 async function copyEmail() {
   const email = "asandatope@gmail.com"
+  const message = document.querySelector("#copy-message")
+
   try {
     await navigator.clipboard.writeText(email)
-    return "Email copied to clipboard"
+    message.textContent = "Email copied!"
+
+    setTimeout(() => {
+      message.textContent = ""
+    }, 3000) // disappears after 3 seconds
   } catch (error) {
     console.log("ERR", error)
-    return "Couldn't copy email address"
+    message.textContent = "Couldn't copy email address"
+
+    setTimeout(() => {
+      message.textContent = ""
+    }, 3000)
   }
 }
+
+const emailButton = document.querySelector("#email-button")
+emailButton.addEventListener("click", copyEmail)
+
 // ---- Footer year ----
 document.getElementById("year").textContent = new Date().getFullYear()
 
@@ -71,19 +85,7 @@ async function loadProjects() {
 function renderProjectRow(p) {
   const linkHtml = p.link
     ? `<a href="${escapeHtml(p.link)}" class="btn rounded-none" data-variant="outline" data-size="sm" target="_blank" rel="noopener">
-                    <svg
-                        class="w-3.5 h-3.5 shrink-0 ml-1"
-                        fill="none"
-                        stroke="#666666"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M7 17L17 7M7 7h10v10"
-                        ></path>
-                      </svg></a>`
+                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right preview-icon"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>`
     : `<span class="text-xs  text-ink/40 dark:text-panelText/40">—</span>`
 
   const techHtml = p.tech?.length
